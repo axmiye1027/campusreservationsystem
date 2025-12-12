@@ -9,6 +9,7 @@ private:
   string username;
 public:
   User();
+  User(string userName);
   bool isUser(istream& file, string userName);
   bool isAdmin(istream&file, string userName);
 
