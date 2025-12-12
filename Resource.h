@@ -23,7 +23,7 @@ public:
     virtual void display(ostream& out) const = 0;
     virtual string getCategory() const = 0;
 
-    ostream& operator<<(ostream& os, const Resource& r);
+    friend ostream& operator<<(ostream& os, const Resource& r);
 };
 
 

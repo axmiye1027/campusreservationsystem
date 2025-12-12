@@ -24,5 +24,6 @@ public:
 
     // Return a copy of all resources for display or iteration.
     vector<shared_ptr<Resource>> listResources() const;
+};
 
 #endif

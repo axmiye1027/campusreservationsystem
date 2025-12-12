@@ -1,6 +1,8 @@
 #include "ReservationManager.h"
 #include <iostream>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
