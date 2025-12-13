@@ -63,3 +63,20 @@ vector<shared_ptr<Resource>> ResourceManager::filterByAttribute(const string& at
 
     return result;
 }
+
+
+//Returns a vector of resources with the key name included in the resource name
+vector<shared_ptr<Resource>> ResourceManager::findByName(const string& name) const
+{
+    vector<shared_ptr<Resource>> result;
+
+    for(const auto& res : resources)
+    {
+        if(res->getName().find(name) != string::npos)
+        {
+            result.push_back(res);
+        }
+    }
+
+    return result;
+}

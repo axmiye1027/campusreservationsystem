@@ -30,6 +30,9 @@ public:
 
     //Filter by attributes and their value
     vector<shared_ptr<Resource>> filterByAttribute(const string& attribute, const string& attributeValue) const;
+
+    //Finds resources with name included in the resource name
+    vector<shared_ptr<Resource>> findByName(const string& name) const;
 };
 
 #endif
