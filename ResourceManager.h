@@ -27,6 +27,9 @@ public:
 
     //Filter by category
     vector<shared_ptr<Resource>> filterByCategory(const string& category) const;
+
+    //Filter by attributes and their value
+    vector<shared_ptr<Resource>> filterByAttribute(const string& attribute, const string& attributeValue) const;
 };
 
 #endif

@@ -47,3 +47,19 @@ vector<shared_ptr<Resource>> ResourceManager::filterByCategory(const string& cat
 
     return result;
 }
+
+//Filter resources by attribute and value
+vector<shared_ptr<Resource>> ResourceManager::filterByAttribute(const string& attribute, const string& attributeValue) const
+{
+    vector<shared_ptr<Resource>> result;
+
+    for(const auto& res : resources)
+    {
+        if(res->matchesAttribute(attribute, attributeValue))
+        {
+            result.push_back(res);
+        }
+    }
+
+    return result;
+}
