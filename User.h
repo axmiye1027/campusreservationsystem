@@ -1,3 +1,6 @@
+#ifndef USER_H
+#define USER_H
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -16,3 +19,5 @@ public:
   string getUsername();
   void setUsername(string userName);
 };
+
+#endif
