@@ -31,3 +31,19 @@ shared_ptr<Resource> ResourceManager::findResource(int id) const {
 vector<shared_ptr<Resource>> ResourceManager::listResources() const {
     return resources;
 }
+
+//Filter resources by category
+vector<shared_ptr<Resource>> ResourceManager::filterByCategory(const string& category) const
+{
+    vector<shared_ptr<Resource>> result;
+
+    for(const auto& res : resources)
+    {
+        if(res->getCategory() == category)
+        {
+            result.push_back(res);
+        }
+    }
+
+    return result;
+}

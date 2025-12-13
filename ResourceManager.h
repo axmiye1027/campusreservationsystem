@@ -24,6 +24,9 @@ public:
 
     // Return a copy of all resources for display or iteration.
     vector<shared_ptr<Resource>> listResources() const;
+
+    //Filter by category
+    vector<shared_ptr<Resource>> filterByCategory(const string& category) const;
 };
 
 #endif
