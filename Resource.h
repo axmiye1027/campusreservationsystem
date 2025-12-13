@@ -12,7 +12,7 @@ protected:
     string name;
 
 public:
-    Resource(int id, string name);
+    Resource(int id, const string& name);
     virtual ~Resource() = default;
 
     int getId() const;
@@ -22,6 +22,8 @@ public:
 
     virtual void display(ostream& out) const = 0;
     virtual string getCategory() const = 0;
+
+    virtual bool matchesAttribute(const string& attribute, const string& attributeValue) const = 0;
 
     friend ostream& operator<<(ostream& os, const Resource& r);
 };

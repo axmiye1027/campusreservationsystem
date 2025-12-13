@@ -25,3 +25,19 @@ void LabEquipment::display(ostream& os) const {
         << "  Type: " << equipmentType << "\n"
         << "  Fragile: " << (fragile ? "Yes" : "No") << "\n";
 }
+
+bool LabEquipment::matchesAttribute(const string& attribute, const string& attributeValue) const
+{
+    if(attribute == "equipmentType")
+    {
+        return equipmentType == attributeValue;
+    }
+
+    if(attribute == "fragile")
+    {
+        bool fragility = (attributeValue == "true");
+        return fragile == fragility;
+    }
+
+    return false;
+}

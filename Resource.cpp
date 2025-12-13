@@ -1,7 +1,7 @@
 #include "Resource.h"
 
 // Constructor
-Resource::Resource(int id, const std::string& name)
+Resource::Resource(int id, const string& name)
     : id(id), name(name) {
 }
 

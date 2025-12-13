@@ -22,6 +22,7 @@ public:
     // Overrides
     string getCategory() const override;
     void display(ostream& os = cout) const override;
+    bool matchesAttribute(const string& attribute, const string& attributeValue) const override;
 };
 
 #endif

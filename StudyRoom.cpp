@@ -34,3 +34,24 @@ void StudyRoom::display(ostream& os) const {
         << "  Location: " << location << "\n"
         << "  Availability: " << availabilityHours << "\n";
 }
+
+bool StudyRoom::matchesAttribute(const string& attribute, const string& attributeValue) const
+{
+    if(attribute == "capacity")
+    {
+        string capacityStr = to_string(capacity);
+        return capacityStr == attributeValue;
+    }
+
+    if(attribute == "location")
+    {
+        return location == attributeValue;
+    }
+
+    if(attribute == "availabilityHours")
+    {
+        return availabilityHours == attributeValue;
+    }
+
+    return false;
+}
