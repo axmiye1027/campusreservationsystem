@@ -4,7 +4,7 @@
 User::User() : username("") {}
 
 // Parameterized constructor
-User::User(string userName) : username(userName) {}\
+User::User(string userName) : username(userName) {}
 
 
 
