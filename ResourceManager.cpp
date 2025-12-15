@@ -83,38 +83,6 @@ vector<shared_ptr<Resource>> ResourceManager::findByName(const string& name) con
     }
 
     return result;
-
-    //Saves to a File
-    bool ResourceManager::saveToFile(const sting& path) const {
-        ofstream out(path);
-        if(!out) return false;
-        out << resources.size() << '\n';
-        for (const auto& r : resources) { 
-            r.saveToFile(out);
-        }
-        return true;
-    }
-
-    //Load from a file
-    bool ResourceManager::loadFromFile(const string& path) {
-        ifstream in(path);
-        if (!in) return false
-        
-        size_t count;
-        in >> count;
-        in.ignore();
-
-        resources.clear();
-        for (size_t i = 0; i < count; ++i) {
-            int id;
-            string name;
-
-            in >> id;
-            in.ignore();
-            getline(in, name);
-        }
-        return true;
-    }
 }
 
 // Save resources to file
