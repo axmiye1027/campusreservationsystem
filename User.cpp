@@ -15,10 +15,10 @@ return true;
 }
 
 //Implementaion of Loading from File
-bool User::loadToFile (const string& path) const {
+bool User::loadFromFile (const string& path) {
 ifstream in (path);
 if (!in) return false;
-getlin (in, username);
+getline (in, username);
 return true;
 }
 

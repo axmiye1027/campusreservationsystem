@@ -1,0 +1,6 @@
+StudyRoom,1,Library Study Room A,4,Library 2nd Floor,08:00-22:00
+StudyRoom,2,Science Building Room 101,6,Science Building,09:00-21:00
+StudyRoom,3,Quiet Study Room B,2,Library 3rd Floor,07:00-23:00
+LabEquipment,4,Microscope Alpha,Microscope,true
+LabEquipment,5,Oscilloscope Beta,Oscilloscope,false
+LabEquipment,6,Centrifuge Gamma,Centrifuge,true

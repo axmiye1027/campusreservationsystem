@@ -1,5 +1,9 @@
 #include "ResourceManager.h"
+#include "StudyRoom.h"
+#include "LabEquipment.h"
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 
 // Store a new resource instance.
 void ResourceManager::addResource(shared_ptr<Resource> resource) {
@@ -79,4 +83,70 @@ vector<shared_ptr<Resource>> ResourceManager::findByName(const string& name) con
     }
 
     return result;
+}
+
+// Save resources to file
+bool ResourceManager::saveToFile(const string& path) const {
+    ofstream out(path);
+    if (!out.is_open()) return false;
+
+    for (const auto& res : resources) {
+        string category = res->getCategory();
+        if (category == "StudyRoom") {
+            auto studyRoom = dynamic_pointer_cast<StudyRoom>(res);
+            if (studyRoom) {
+                out << "StudyRoom," << studyRoom->getId() << "," << studyRoom->getName() << ","
+                    << studyRoom->getCapacity() << "," << studyRoom->getLocation() << ","
+                    << studyRoom->getAvailabilityHours() << "\n";
+            }
+        } else if (category == "LabEquipment") {
+            auto labEquipment = dynamic_pointer_cast<LabEquipment>(res);
+            if (labEquipment) {
+                out << "LabEquipment," << labEquipment->getId() << "," << labEquipment->getName() << ","
+                    << labEquipment->getEquipmentType() << "," << (labEquipment->isFragile() ? "true" : "false") << "\n";
+            }
+        }
+    }
+    return true;
+}
+
+// Load resources from file
+bool ResourceManager::loadFromFile(const string& path) {
+    ifstream in(path);
+    if (!in.is_open()) {
+        return false;
+    }
+
+    resources.clear();
+
+    string line;
+    while (getline(in, line)) {
+        if (line.empty()) continue;
+        stringstream ss(line);
+        string token;
+        vector<string> tokens;
+        while (getline(ss, token, ',')) {
+            tokens.push_back(token);
+        }
+
+        if (tokens.size() < 3) continue;
+
+        string type = tokens[0];
+        int id = stoi(tokens[1]);
+        string name = tokens[2];
+
+        if (type == "StudyRoom" && tokens.size() >= 6) {
+            int capacity = stoi(tokens[3]);
+            string location = tokens[4];
+            string availabilityHours = tokens[5];
+            auto studyRoom = make_shared<StudyRoom>(id, name, capacity, location, availabilityHours);
+            resources.push_back(studyRoom);
+        } else if (type == "LabEquipment" && tokens.size() >= 5) {
+            string equipmentType = tokens[3];
+            bool fragile = (tokens[4] == "true");
+            auto labEquipment = make_shared<LabEquipment>(id, name, equipmentType, fragile);
+            resources.push_back(labEquipment);
+        }
+    }
+    return true;
 }
