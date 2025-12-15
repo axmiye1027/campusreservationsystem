@@ -18,6 +18,9 @@ public:
 
   string getUsername();
   void setUsername(string userName);
+
+  // Displays the username
+  void display(ostream& out) const:
 };
 
 #endif
