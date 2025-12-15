@@ -19,8 +19,9 @@ public:
   string getUsername();
   void setUsername(string userName);
 
-  // Displays the username
-  void display(ostream& out) const:
+  // The Load and Save functions for User Class
+  bool saveToFile (const string& path) const;
+  bool loadFromFile (const string& path);
 };
 
 #endif
