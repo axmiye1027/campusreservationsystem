@@ -33,6 +33,10 @@ public:
 
     //Finds resources with name included in the resource name
     vector<shared_ptr<Resource>> findByName(const string& name) const;
+
+    //Loads and Saves from/to a file
+    bool saveToFile (const string& path) const;
+    bool loadFromFile (const string& path);
 };
 
 #endif
