@@ -14,7 +14,7 @@ class ResourceManager {
 
 public:
     // Store a new resource instance.
-    void addResource(shared_ptr<Resource> resource);
+    bool addResource(shared_ptr<Resource> resource);
 
     // Remove a resource by ID if it exists.
     bool removeResource(int id);
