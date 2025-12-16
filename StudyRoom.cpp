@@ -35,6 +35,8 @@ void StudyRoom::display(ostream& os) const {
         << "  Availability: " << availabilityHours << "\n";
 }
 
+//Determines if searched attribute and searched attribute's value matches the study room's
+//objects attribute and value
 bool StudyRoom::matchesAttribute(const string& attribute, const string& attributeValue) const
 {
     if(attribute == "capacity")

@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//Checks if reservations conflict
 bool ReservationManager::hasCollision(const Reservation& candidate) const {
     auto it = reservationsByResource.find(candidate.getResourceId());
     if (it == reservationsByResource.end()) return false;
@@ -17,11 +18,13 @@ bool ReservationManager::hasCollision(const Reservation& candidate) const {
     return false;
 }
 
+//Adds the reservation id to the username and resource id index maps
 void ReservationManager::indexReservation(const Reservation& reservation) {
     reservationsByResource[reservation.getResourceId()].push_back(reservation.getId());
     reservationsByUser[reservation.getUserId()].push_back(reservation.getId());
 }
 
+//Removes the reservation id from the username and resource id index maps
 void ReservationManager::unindexReservation(int reservationId) {
     auto found = reservationsById.find(reservationId);
     if (found == reservationsById.end()) return;
@@ -34,6 +37,8 @@ void ReservationManager::unindexReservation(int reservationId) {
     userVec.erase(remove(userVec.begin(), userVec.end(), reservationId), userVec.end());
 }
 
+//Validates resevations for time ordering and non conflicting reservation, stores reservation
+//updates indexes and increments next reservation id
 bool ReservationManager::createReservation(const string& userId, int resourceId, const string& date,
                                            const string& startTime, const string& endTime,
                                            Reservation& created) {
@@ -58,6 +63,7 @@ bool ReservationManager::createReservation(const string& userId, int resourceId,
     }
 }
 
+//Finds reservation, unindexes reservation and deletes from reservation storage
 bool ReservationManager::cancelReservation(int reservationId, const string& requestingUserId) {
     auto it = reservationsById.find(reservationId);
     if (it == reservationsById.end()) return false;
@@ -71,6 +77,7 @@ bool ReservationManager::cancelReservation(int reservationId, const string& requ
     return true;
 }
 
+//Obtains all reservations for a single user
 vector<Reservation> ReservationManager::getReservationsForUser(const string& userId) const {
     vector<Reservation> result;
     auto it = reservationsByUser.find(userId);
@@ -81,6 +88,7 @@ vector<Reservation> ReservationManager::getReservationsForUser(const string& use
     return result;
 }
 
+//Obtains all reservations for a specific resource
 vector<Reservation> ReservationManager::getReservationsForResource(int resourceId) const {
     vector<Reservation> result;
     auto it = reservationsByResource.find(resourceId);
@@ -91,6 +99,7 @@ vector<Reservation> ReservationManager::getReservationsForResource(int resourceI
     return result;
 }
 
+//Prints all reservations
 void ReservationManager::displayAll(ostream& out) const {
     for (const auto& entry : reservationsById) {
         entry.second.display(out);
@@ -98,6 +107,7 @@ void ReservationManager::displayAll(ostream& out) const {
     }
 }
 
+//Creates and indexes reservations from a file 
 bool ReservationManager::loadFromFile(const string& path) {
     ifstream in(path);
     if (!in.is_open()) {
@@ -128,6 +138,7 @@ bool ReservationManager::loadFromFile(const string& path) {
     return true;
 }
 
+//Saves all resevations to file if file is properly opened 
 bool ReservationManager::saveToFile(const string& path) const {
     ofstream out(path);
     if (!out.is_open()) return false;

@@ -11,6 +11,7 @@ Reservation::Reservation(int reservationId, string userId, int resourceId, strin
     : reservationId(reservationId), userId(move(userId)), resourceId(resourceId),
       date(move(date)), startTime(move(startTime)), endTime(move(endTime)) {}
 
+//converts time string to minutes past midnight
 int Reservation::toMinutes(const string& timeString) {
     tm parsed{};
     istringstream ss(timeString);
@@ -21,6 +22,8 @@ int Reservation::toMinutes(const string& timeString) {
     return parsed.tm_hour * 60 + parsed.tm_min;
 }
 
+//Determines if a reservation conflicts with another reservation by comparing
+// the resource, date and start and end time of both reservations
 bool Reservation::overlaps(const Reservation& other) const {
     if (resourceId != other.resourceId) return false;
     if (date != other.date) return false;

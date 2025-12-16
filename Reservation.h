@@ -20,6 +20,7 @@ public:
     Reservation(int reservationId, string userId, int resourceId, string date,
                 string startTime, string endTime);
 
+    //Getters
     int getId() const { return reservationId; }
     const string& getUserId() const { return userId; }
     int getResourceId() const { return resourceId; }

@@ -26,6 +26,8 @@ void LabEquipment::display(ostream& os) const {
         << "  Fragile: " << (fragile ? "Yes" : "No") << "\n";
 }
 
+//Return true if the selected attribute and the searched for value matches the object's
+// attribute's value
 bool LabEquipment::matchesAttribute(const string& attribute, const string& attributeValue) const
 {
     if(attribute == "equipmentType")

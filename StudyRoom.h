@@ -5,6 +5,7 @@
 
 class StudyRoom : public Resource {
 private:
+    //Attribute unique to Study room resource
     int capacity;
     string location;
     string availabilityHours;

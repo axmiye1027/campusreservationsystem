@@ -11,8 +11,13 @@
 using namespace std;
 
 class ReservationManager {
+    //Storage for all reservations, key is reservation id, value is Reservation object
     unordered_map<int, Reservation> reservationsById;
+
+    //Index for reservation id's using a resource id
     unordered_map<int, vector<int>> reservationsByResource;
+
+    //Index for reservation id's using a username
     unordered_map<string, vector<int>> reservationsByUser;
     int nextReservationId{1};
 

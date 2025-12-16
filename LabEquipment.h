@@ -5,6 +5,7 @@
 
 class LabEquipment : public Resource {
 private:
+    //Attributes unique to Lab equipment resource
     string equipmentType;
     bool fragile;
 

@@ -17,7 +17,7 @@ public:
     void addResource(shared_ptr<Resource> resource);
 
     // Remove a resource by ID if it exists.
-        bool removeResource(int id);
+    bool removeResource(int id);
 
     // Locate a resource by ID.
     shared_ptr<Resource> findResource(int id) const;
@@ -25,10 +25,10 @@ public:
     // Return a copy of all resources for display or iteration.
     vector<shared_ptr<Resource>> listResources() const;
 
-    //Filter by category
+    //Filter resources by category
     vector<shared_ptr<Resource>> filterByCategory(const string& category) const;
 
-    //Filter by attributes and their value
+    //Filter resources by attributes and their value
     vector<shared_ptr<Resource>> filterByAttribute(const string& attribute, const string& attributeValue) const;
 
     //Finds resources with name included in the resource name
