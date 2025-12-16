@@ -6,8 +6,15 @@
 #include <sstream>
 
 // Store a new resource instance.
-void ResourceManager::addResource(shared_ptr<Resource> resource) {
+bool ResourceManager::addResource(shared_ptr<Resource> resource)
+{
+    // Check for duplicate ID
+    if (findResource(resource->getId()) != nullptr) {
+        return false;  // duplicate ID
+    }
+
     resources.push_back(move(resource));
+    return true;
 }
 
 // Remove a resource by ID if it exists.
