@@ -130,13 +130,29 @@ User UserManager::createAccount(const int BORDER_SIZE)
 	cout << "CREATING ACCOUNT\n";
 	cout << setfill('-') << setw(BORDER_SIZE) << "" << endl;
 
-	cout << "Choose role (a/s): ";
-	cin.get(roleCh);
-	cin.ignore(10000, '\n');
-	switch(roleCh)
+	bool validRole = false;
+	while (!validRole)
 	{
-		case 'a': role = "Admin"; break;
-		case 's': role = "Student"; break;
+		cout << "Choose role (a/s): ";
+		cin.get(roleCh);
+		cin.ignore(10000, '\n');
+		
+		switch(roleCh)
+		{
+			case 'a': 
+			case 'A':
+				role = "Admin"; 
+				validRole = true;
+				break;
+			case 's': 
+			case 'S':
+				role = "Student"; 
+				validRole = true;
+				break;
+			default:
+				cout << "Invalid selection. Please enter 'a' for Admin or 's' for Student.\n";
+				break;
+		}
 	}
 
 	getAndValidateUsername(username, ERROR_MSG);

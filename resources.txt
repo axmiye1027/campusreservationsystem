@@ -4,3 +4,4 @@ StudyRoom,3,Quiet Study Room B,2,Library 3rd Floor,07:00-23:00
 LabEquipment,4,Microscope Alpha,Microscope,true
 LabEquipment,5,Oscilloscope Beta,Oscilloscope,false
 LabEquipment,6,Centrifuge Gamma,Centrifuge,true
+StudyRoom,23,Room 101,25,West,08:00-22:00

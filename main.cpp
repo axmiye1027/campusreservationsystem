@@ -1,17 +1,25 @@
-#include "TestSuite.h"
 #include "User.h"
 #include "UserManager.h"
 #include "Menu.h"
+#include "ResourceManager.h"
+#include "ReservationManager.h"
+#include <iostream>
+
+using namespace std;
 
 int main() {
-    TestSuite::runAllTests();
-
     const int BORDER_SIZE = 80;
 	User currentUser;
 	UserManager userManager;
+	ResourceManager resourceManager;
+	ReservationManager reservationManager;
 	int lowerBound = 0;
 	int upperBound;
 	int option = -1;
+	
+	// Load data from files
+	resourceManager.loadFromFile("resources.txt");
+	reservationManager.loadFromFile("reservations.txt");
 
 	/**************************************************************************
 	 * PROCESSING - This loop prompts users to login, create an account, or
@@ -24,8 +32,8 @@ int main() {
 
         //Determine upperBound
         if (!currentUser.getIsLoggedIn()) { upperBound = 3; }
-        else if (currentUser.getRole() == "Admin") { upperBound = 6; }
-        else { upperBound = 4; }
+        else if (currentUser.getRole() == "Admin") { upperBound = 7; }
+        else { upperBound = 6; }
 
         getAndValidateMenuInput(option,lowerBound,upperBound);//lowerBound is always = 0.
 
@@ -34,14 +42,19 @@ int main() {
         case 0:
         	 if (!currentUser.getIsLoggedIn())
         	 {
+        		 // Save data before exiting
+        		 resourceManager.saveToFile("resources.txt");
+        		 reservationManager.saveToFile("reservations.txt");
         		 cout << "\nExiting program.\n";
         		 return 0;
         	 }
         	 else
         	 {
+        		 // Save data before logging out
+        		 resourceManager.saveToFile("resources.txt");
+        		 reservationManager.saveToFile("reservations.txt");
         		 currentUser.setIsLoggedIn(false);
-        		 cout << "\nLogged out " << currentUser.getUsername() << "!";
-
+        		 cout << "\nLogged out " << currentUser.getUsername() << "!\n";
         	 }
             break;
 
@@ -52,11 +65,11 @@ int main() {
         	  }
             else if (currentUser.getRole() == "Admin")
             {
-            	//FINDING RESOURCES
+            	findResources(BORDER_SIZE, resourceManager);
             }
             else
             {
-            	//RESERVING RESOURCES
+            	reserveResource(BORDER_SIZE, resourceManager, reservationManager, currentUser);
             }
             break;
 
@@ -68,29 +81,48 @@ int main() {
             }
             else if (currentUser.getRole() == "Admin")
             {
-            	//VIEW RESOURCES
-
+            	viewResources(BORDER_SIZE, resourceManager);
             }
             else
             {
-            	//FINDING RESOURCES
+            	findResources(BORDER_SIZE, resourceManager);
             }
             break;
         case 3:
         	if (currentUser.getRole() == "Admin")
         	{
-        		//ADD CAMPUS RESOURCES
+        		addResource(BORDER_SIZE, resourceManager);
         	}
         	else
         	{
-        		//VIEW CAMPUS RESOURCES
+        		viewResources(BORDER_SIZE, resourceManager);
         	}
         	break;
         case 4:
-        	//EDIT CAMPUS RESOURCES
+        	if (currentUser.getRole() == "Admin")
+        	{
+        		editResource(BORDER_SIZE, resourceManager);
+        	}
+        	else
+        	{
+        		viewMyReservations(BORDER_SIZE, reservationManager, currentUser);
+        	}
         	break;
         case 5:
-        	//DELETE CAMPUS RESOURCES
+        	if (currentUser.getRole() == "Admin")
+        	{
+        		deleteResource(BORDER_SIZE, resourceManager, reservationManager);
+        	}
+        	else
+        	{
+        		cancelReservation(BORDER_SIZE, reservationManager, currentUser);
+        	}
+        	break;
+        case 6:
+        	if (currentUser.getRole() == "Admin")
+        	{
+        		runAllTests(BORDER_SIZE);
+        	}
         	break;
 
         default:

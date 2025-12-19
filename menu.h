@@ -11,6 +11,8 @@
 #include <iostream>
 #include <string>
 #include "User.h"
+#include "ResourceManager.h"
+#include "ReservationManager.h"
 using namespace std;
 
 /***********************************************************************
@@ -68,6 +70,21 @@ void displayMenu(const int BORDER_SIZE, User &u);
  **********************************************************************/
 void getAndValidateMenuInput(int& input, const int LOWER_BOUND, const int UPPER_BOUND);
 
+// Student menu functions
+void reserveResource(const int BORDER_SIZE, ResourceManager& resourceManager, 
+                     ReservationManager& reservationManager, User& currentUser);
+void findResources(const int BORDER_SIZE, ResourceManager& resourceManager);
+void viewResources(const int BORDER_SIZE, ResourceManager& resourceManager);
+void viewMyReservations(const int BORDER_SIZE, ReservationManager& reservationManager, 
+                        User& currentUser);
+void cancelReservation(const int BORDER_SIZE, ReservationManager& reservationManager, 
+                       User& currentUser);
 
+// Admin menu functions
+void addResource(const int BORDER_SIZE, ResourceManager& resourceManager);
+void editResource(const int BORDER_SIZE, ResourceManager& resourceManager);
+void deleteResource(const int BORDER_SIZE, ResourceManager& resourceManager, 
+                    ReservationManager& reservationManager);
+void runAllTests(const int BORDER_SIZE);
 
 #endif
