@@ -1,5 +1,12 @@
-#ifndef USER_H
-#define USER_H
+/******************************************************************************
+ * AUTHORS			: Paul S, Ryland L, Amy X, Cristal D, Elizabeth S
+ * PROJECT #3		: Campus Reservation System
+ * CLASS			: CS 1C
+ * SECTION			: TTh 8a
+ * DUE DATE			: 12/22/25
+******************************************************************************/
+#ifndef USER_H_
+#define USER_H_
 
 #include <iostream>
 #include <string>
@@ -10,18 +17,28 @@ class User
 {
 private:
   string username;
+  string role;
+  bool isLoggedIn;
+
 public:
   User();
-  User(string userName);
-  bool isUser(istream& file, string userName);
-  bool isAdmin(istream&file, string userName);
+  User(string userName, string userRole);
+
+
+  void login(string userName);
 
   string getUsername();
-  void setUsername(string userName);
+  string getRole();
+  bool getIsLoggedIn();
 
-  // The Load and Save functions for User Class
-  bool saveToFile (const string& path) const;
-  bool loadFromFile (const string& path);
+  void setUsername(string userName);
+  void setRole(string role);
+  void setIsLoggedIn(bool isLoggedIn);
+
+
 };
+
+
+
 
 #endif
